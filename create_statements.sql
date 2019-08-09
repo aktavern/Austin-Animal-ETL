@@ -2,7 +2,7 @@ CREATE DATABASE austin_animal_center;
 
 CREATE TABLE intakes(id varchar(30),
              intake_name varchar,
-             intake_time timestamp,
+             intake_date timestamp,
               intake_type varchar,
               intake_condition varchar,
               animal_type varchar,
