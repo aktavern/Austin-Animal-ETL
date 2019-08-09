@@ -66,6 +66,7 @@ We also renamed the columns to make it easier to use in PostgreSQL:
 CREATE TABLE outcomes(id varchar(30),
                        outcome_name varchar,
                        outcome_date timestamp,
+		       outcome_type varchar,
                        outcome_age varchar)
  
  ```
