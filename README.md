@@ -70,7 +70,25 @@ CREATE TABLE outcomes(id varchar(30),
                        outcome_age varchar)
  
  ```
-Because id could appear multiple times in the table, it was not a suitable primary key. Consequently, we did not have a primary key for our tables. 
+Because id could appear multiple times in the table, it was not a suitable primary key. Consequently, we did not have a primary key for our tables.
+
+Instead, the following query can be used to join the data as needed:
+
+```pd.read_sql_query('select distinct i.intake_time,\
+     (select min(outcome_date) from outcomes o where o.id = i.id and outcome_date >= i.intake_time) as outcome_date,\
+    i.id, \
+    i.intake_name,\
+    (select min(outcome_name) from outcomes o where o.id = i.id) as outcome_name,\
+    i.intake_type,\
+    i.intake_condition,\
+    i.animal_type,\
+    i.intake_age,\
+    (select min(o.outcome_age) from outcomes o where o.id = i.id) as outcome_age,\
+    i.breed,\
+    i.color,\
+    (select min(outcome_type) from outcomes o where o.id = i.id) as outcome_type\
+    from intakes i', con=engine)
+   ```
  
 Using sqlalchemy, we loaded the transformed data into the appropriate tables:
 ```
