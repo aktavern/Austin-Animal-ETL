@@ -1,4 +1,6 @@
-create table intakes( id varchar(30) PRIMARY KEY,
+CREATE DATABASE austin_animal_center;
+
+CREATE TABLE intakes(id varchar(30),
              intake_name varchar,
              intake_time timestamp,
               intake_type varchar,
@@ -6,10 +8,10 @@ create table intakes( id varchar(30) PRIMARY KEY,
               animal_type varchar,
              intake_age varchar,
              breed varchar,
-             color varchar)
+             color varchar);
 			 
-create table outcomes (id varchar(30) PRIMARY KEY,
+CREATE TABLE outcomes(id varchar(30),
                        outcome_name varchar,
                        outcome_date timestamp,
-                       outcome_age varchar,
-					  FOREIGN KEY(id) references intakes(id))			 
+					  outcome_type varchar,
+                       outcome_age varchar)
