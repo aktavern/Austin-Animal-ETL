@@ -40,6 +40,7 @@ We also renamed the columns to make it easier to use in PostgreSQL:
     outcomes_df = outcomes_df.rename(columns ={'Animal ID': 'id',
                                          'Name' : 'outcome_name',
                                          'DateTime': 'outcome_date',
+					 'Outcome Type': 'outcome_type',
                                          'Age upon Outcome':'outcome_age'})
  ```
  
@@ -61,6 +62,16 @@ We also renamed the columns to make it easier to use in PostgreSQL:
              breed varchar,
              color varchar)
 			 
+CREATE TABLE intakes(id varchar(30),
+             intake_name varchar,
+             intake_time timestamp,
+              intake_type varchar,
+              intake_condition varchar,
+              animal_type varchar,
+             intake_age varchar,
+             breed varchar,
+             color varchar)
+			 
 CREATE TABLE outcomes(id varchar(30),
                        outcome_name varchar,
                        outcome_date timestamp,
@@ -69,3 +80,8 @@ CREATE TABLE outcomes(id varchar(30),
  ```
 Because id could appear multiple times in the table, it was not a suitable primary key. Consequently, we did not have a primary key for our tables. 
  
+Using sqlalchemy, we loaded the transformed data into the appropriate tables:
+```
+intake_df.to_sql(name = 'intakes', con = engine, if_exists='append', index =False)
+outcomes_df.to_sql(name = 'outcomes' , con = engine, if_exists ='append', index = False)
+```
